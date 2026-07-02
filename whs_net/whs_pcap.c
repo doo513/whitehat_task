@@ -21,7 +21,7 @@ void print_message(const u_char *msg, int msg_len)
         return;
     }
 
-    printf("         Message:\n");
+    printf("         HTTPMessage:\n");
 
     for (int i = 0; i < msg_len; i++) {
         if (msg[i] >= 32 && msg[i] <= 126) {
@@ -49,14 +49,14 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
     const u_char *msg = (const u_char *)
                            (packet + sizeof(struct ethheader) + ip->iph_ihl * 4 + (port->tcp_offx2 >> 4) * 4);
 
-    print_mac("      Mac From", eth->ether_shost);
-    print_mac("      Mac To", eth->ether_dhost);
+    print_mac("      Src Mac : ", eth->ether_shost);
+    print_mac("      Dst Mac : ", eth->ether_dhost);
 
-    printf("         IP From: %s\n", inet_ntoa(ip->iph_sourceip));   
-    printf("         IP To: %s\n", inet_ntoa(ip->iph_destip));    
+    printf("         Src Ip : %s\n", inet_ntoa(ip->iph_sourceip));   
+    printf("         Dst IP : %s\n", inet_ntoa(ip->iph_destip));    
 
-    printf("         Port Source: %d\n", ntohs(port->tcp_sport));
-    printf("         Port Dest: %d\n", ntohs(port->tcp_dport));
+    printf("         Src Port: %d\n", ntohs(port->tcp_sport));
+    printf("         Dst Port: %d\n", ntohs(port->tcp_dport));
 
     print_message(msg, msg_len);
 
