@@ -49,8 +49,8 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
     const u_char *msg = (const u_char *)
                            (packet + sizeof(struct ethheader) + ip->iph_ihl * 4 + (port->tcp_offx2 >> 4) * 4);
 
-    print_mac("      Src Mac : ", eth->ether_shost);
-    print_mac("      Dst Mac : ", eth->ether_dhost);
+    print_mac("        Src Mac : ", eth->ether_shost);
+    print_mac("        Dst Mac : ", eth->ether_dhost);
 
     printf("         Src Ip : %s\n", inet_ntoa(ip->iph_sourceip));   
     printf("         Dst IP : %s\n", inet_ntoa(ip->iph_destip));    
